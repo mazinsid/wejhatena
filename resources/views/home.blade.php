@@ -86,7 +86,7 @@
     <!--=====================================
                     HEADER PART START
         =======================================-->
-    @include('layout.header', ['setting' => $setting->color]);
+    @include('layout.header', ['setting' => $setting->color ?? '#04b']);
     <!--=====================================
                     HEADER PART END
         =======================================-->
@@ -305,7 +305,7 @@
         <div class="container">
             <div class="suggest-slider slider-arrow">
                 @foreach ($categories as $category)
-                    <a href="ad-list-column3.html" class="suggest-card">
+                    <a href="{{ route('home.filter') }}?type=category&category={{ $category->id }}" class="suggest-card">
                         <img src="{{ asset('/storage/category/' . $category->icon) }}" alt="car">
                         <h6>
                             @if (App::getLocale() == 'ar')
@@ -365,7 +365,7 @@
                                 {{-- <div class="cross-inline-badge feature-badge">
                                     <span>featured</span>
                                     <i class="fas fa-book-open"></i>
-                                </div> 
+                                </div>
                                 <button type="button" class="feature-wish">
                                     <i class="fas fa-heart"></i>
                                 </button> --}}
@@ -1713,11 +1713,11 @@
             <div class="row">
                 @foreach ($countries as $countrie)
                     <div class="col-sm-6 col-md-6 col-lg-3">
-                        <a href="ad-list-column3.html" class="city-card"
+                        <a href="{{ route('home.filter') }}?type=city&city={{ $countrie->id }}" class="city-card"
                             style="background: url(images/cities/01.jpg) no-repeat center; background-size: cover">
                             <div class="city-content">
                                 <h4>{{ $countrie->name_en }}</h4>
-                                <p>(25) {{ __('ads.ads') }}</p>
+                                <p>({{ $category->ads_count }}) {{ __('ads.ads') }}</p>
                             </div>
                         </a>
                     </div>
@@ -1759,23 +1759,23 @@
                         <div class="category-card">
                             <div class="category-head">
                                 <img src="{{ asset('/storage/category/' . $category->icon) }}" alt="category">
-                                <a href="#" class="category-content">
+                                <a href="{{ route('home.filter', $category) }}?type=category&category={{ $category->id }}" class="category-content">
                                     <h4>{{ $categorie->name_en }}</h4>
                                     <p>(3678)</p>
                                 </a>
                             </div>
                             <ul class="category-list">
                                 @foreach ($categorie->subcategories as $catsub)
-                                    <li><a href="#">
+                                    <li><a href="{{ route('home.filter') }}?type=sub_category&category={{ $catsub->id }}">
                                             <h6>{{ $catsub->name_en }}</h6>
-                                            <p>(34)</p>
+                                            <p>({{ $catsub->ads_count }})</p>
                                         </a></li>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
                 @endforeach
-                <div class="row">
+                <div class="col-md-12">
                     <div class="col-lg-12">
                         <div class="center-20">
                             <a href="category-list.html" class="btn btn-inline">

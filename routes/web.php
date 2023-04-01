@@ -46,12 +46,14 @@ use Symfony\Component\Translation\MessageCatalogue;
 
 Route::get('language/{locale}', [HomeController::class, 'language'])->name('language-web');
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('home', [HomeController::class, 'index'])->name('home');
 
+Route::get('filter', [HomeController::class, 'filter'])->name('home.filter');
 
 
-Route::middleware(['auth', 'isUser'])->group(function () {
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -66,7 +68,7 @@ Route::middleware(['auth', 'isUser'])->group(function () {
     Route::match(['get', 'post'], 'confirm', [adsController::class, 'confirm'])->name('ads.confirm');
     Route::get('payment', [adsController::class, 'payment'])->name('payment.index');
 
-    // 
+    //
 
     Route::get('/rooms/{id}', [RoomController::class, 'getUserRooms'])->name('getUserRooms');
 

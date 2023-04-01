@@ -30,14 +30,13 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-            <form class="header-form">
+            <form class="header-form" action="{{ route('home.filter') }}">
                 <div class="header-search">
                     <button type="submit" title="Search Submit "><i class="fas fa-search"></i></button>
-                    <input type="text" placeholder="{{ __('lang.search_header') }}">
-
+                    <input type="hidden" name="type" value="search">
+                    <input type="text" placeholder="{{ __('lang.search_header') }}" name="name">
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </div>
-
             </form>
             <div class="header-right">
                 <ul class="header-list">

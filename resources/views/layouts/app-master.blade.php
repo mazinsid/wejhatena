@@ -1,56 +1,96 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+    <head>
+        <!--=====================================
+                        META-TAG PART START
+            =======================================-->
+        <!-- REQUIRE META -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.87.0">
-    <title>Fixed top navbar example · Bootstrap v5.1</title>
+        <!-- AUTHOR META -->
+        <meta name="author" content="Mironcoder">
+        <meta name="email" content="mironcoder@gmail.com">
+        <meta name="profile" content="https://themeforest.net/user/mironcoder">
 
-    <!-- Bootstrap core CSS -->
-    <link href="{!! url('assets/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet">
+        <!-- TEMPLATE META -->
+        <meta name="name" content="Classicads">
+        <meta name="type" content="Classified Advertising">
+        <meta name="title" content="Classicads - Classified Ads HTML Template">
+        <meta name="keywords"
+            content="classicads, classified, ads, classified ads, listing, business, directory, jobs, marketing, portal, advertising, local, posting, ad listing, ad posting,">
+        <!--=====================================
+                        META-TAG PART END
+        =======================================-->
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
+        <!-- FOR WEBPAGE TITLE -->
+        <title>wejhatena</title>
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
+        <!--=====================================
+                        CSS LINK PART START
+            =======================================-->
+        <!-- FAVICON -->
+        <link rel="icon" href="{{ asset('images/favicon.png') }}">
+
+        <!-- FONTS -->
+        <link rel="stylesheet" href="{{ asset('fonts/flaticon/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ asset('fonts/font-awesome/fontawesome.css') }}">
+
+        <!-- VENDOR -->
+        <link rel="stylesheet" href="{{ asset('css/vendor/slick.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.min.css') }}">
+
+        <!-- CUSTOM -->
+        <link rel="stylesheet" href="{{ asset('css/custom/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom/index.css') }}">
+        <!--=====================================
+                        CSS LINK PART END
+            =======================================-->
+        <style>
+            .marquee {
+                width: 100%;
+                line-height: 50px;
+                background-color: rgb(42, 23, 187);
+                color: white;
+                font-weight: 600;
+                white-space: nowrap;
+                overflow: hidden;
+                box-sizing: border-box;
             }
-        }
 
-        .float-right {
-            float: right;
-        }
-    </style>
+            .marquee p {
+                display: inline-block;
+                padding-left: 100%;
+                animation: marquee 30s linear infinite;
+            }
 
+            @keyframes marquee {
+                100% {
+                    transform: translate(0, 100);
+                }
 
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+                0% {
+                    transform: translate(-100%, 0);
+                }
+            }
+        </style>
+        @stack('styles')
+    </head>
+    <body>
+        @include('layout.header', ['setting' => $setting->color ?? '#04b']);
+        <div>
+            @yield('content')
+        </div>
+        @include('layout.footer')
 
-<body>
+        <script src="js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="js/vendor/popper.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/slick.min.js"></script>
 
-    @include('layouts.partials.navbar')
-
-    <main class="container mt-5">
-        @yield('content')
-    </main>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
-
-    @section('scripts')
-
-    @show
-</body>
-
+        <!-- CUSTOM -->
+        <script src="js/custom/slick.js"></script>
+        <script src="js/custom/main.js"></script>
+        @stack('scripts')
+    </body>
 </html>

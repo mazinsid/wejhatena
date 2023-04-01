@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\ExternalAds;
 use App\Models\NewsAds;
 use App\Models\Setting;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,8 +20,8 @@ class HomeController extends Controller
     {
         $setting = Setting::first();
         $ads = Ads::has('adsDetails')->where('status', 0)->get();
-        $categories = Category::with('subcategories')->get();
-        $countries = Country::get();
+        $categories = Category::withCount('ads')->with('subcategories', fn ($query) => $query->withCount('ads'))->get();
+        $countries = Country::withCount('ads')->get();
         $types = AdsTypes::get();
         $news_externals = DB::table('news_ads')->where('status', 0)->get();
         $externals = DB::table('external_ads')->where('status', 0)->get();
@@ -45,5 +46,16 @@ class HomeController extends Controller
         App::setLocale($locale);
         session()->put('locale', $locale);
         return redirect()->back();
+    }
+
+    public function filter(Request  $request)
+    {
+        $ads = Ads::query()
+                ->when($request->type == 'category', fn ($query) => $query->where('category_id', $request->category))
+                ->when($request->type == 'sub_category', fn ($query) => $query->where('subcategory_id', $request->category))
+                ->when($request->type == 'city', fn ($query) => $query->where('city_id', $request->city))
+                ->with(['adsDetails'])
+                ->paginate();
+        return view('category', compact('ads'));
     }
 }
