@@ -274,6 +274,7 @@ class adsController extends Controller
         $similarAds = Ads::has('adsDetails.cover_image')->has('adsDetails')->where('category_id', $ads->category->id)->where('status', 0)->limit(5)->latest()->get();
         return view('ads.ad-details', compact('ads', 'lastAds', 'similarAds'));
     }
+
     public function adsPost()
     {
         return view('ads.ad-post');

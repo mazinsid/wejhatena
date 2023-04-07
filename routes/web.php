@@ -51,6 +51,7 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 
 Route::get('filter', [HomeController::class, 'filter'])->name('home.filter');
 
+Route::get('/ad_details/{id}', [adsController::class, 'adsDetails'])->name('ads.details');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -59,7 +60,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    Route::get('/ad_details/{id}', [adsController::class, 'adsDetails'])->name('ads.details');
     Route::get('/ads_post', [adsController::class, 'create'])->name('ads.post');
     Route::match(['get', 'post'], '/step_one', [adsController::class, 'stepOne'])->name('ads.stepOne');
     Route::match(['get', 'post'], '/step-two', [adsController::class, 'stepTwo'])->name('ads.stepTwo');

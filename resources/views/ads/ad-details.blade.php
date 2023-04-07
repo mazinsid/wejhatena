@@ -1,5 +1,9 @@
 @extends('layouts.app-master')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/custom/ad-details.css') }}">
+@endpush
+
 @section('content')
     <!--=====================================
                     SIDEBAR PART START
@@ -128,7 +132,7 @@
 
 
         <!--=====================================
-                      SINGLE BANNER PART START
+                SINGLE BANNER PART START
             =======================================-->
         <section class="single-banner">
             <div class="container">
@@ -199,66 +203,6 @@
                             </div>
                         </div>
 
-                        <!-- OPENING CARD -->
-                        {{-- <div class="common-card">
-                                <div class="card-header">
-                                    <h5 class="card-title">opening hour</h5>
-                                </div>
-                                <ul class="ad-details-opening">
-                                    <li>
-                                        <h6>Saturday</h6>
-                                        <p>09:00am - 05:00pm</p>
-                                    </li>
-                                    <li>
-                                        <h6>Sunday</h6>
-                                        <p>09:00am - 05:00pm</p>
-                                    </li>
-                                    <li>
-                                        <h6>monday</h6>
-                                        <p>09:00am - 05:00pm</p>
-                                    </li>
-                                    <li>
-                                        <h6>tuesday</h6>
-                                        <p>09:00am - 05:00pm</p>
-                                    </li>
-                                    <li>
-                                        <h6>wednesday</h6>
-                                        <p>09:00am - 05:00pm</p>
-                                    </li>
-                                    <li>
-                                        <h6>thursday</h6>
-                                        <p>09:00am - 05:00pm</p>
-                                    </li>
-                                    <li>
-                                        <h6>friday</h6>
-                                        <p>closed</p>
-                                    </li>
-                                </ul>
-                            </div> --}}
-
-                        <!-- LOCATION CARD -->
-                        {{-- <div class="common-card">
-                                <div class="card-header">
-                                    <h5 class="card-title">area map</h5>
-                                </div>
-                                <iframe class="ad-details-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.3406974350205!2d90.48469931445422!3d23.663771197998262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b0d5983f048d%3A0x754f30c82bcad3cd!2sJalkuri%20Bus%20Stop!5e0!3m2!1sen!2sbd!4v1610539261654!5m2!1sen!2sbd"></iframe>
-                            </div> --}}
-
-                        <!-- SAFETY CARD -->
-                        {{-- <div class="common-card">
-                                <div class="card-header">
-                                    <h5 class="card-title">safety tips</h5>
-                                </div>
-                                <div class="ad-details-safety">
-                                    <p>Check the item before you buy</p>
-                                    <p>Pay only after collecting item</p>
-                                    <p>Beware of unrealistic offers</p>
-                                    <p>Meet seller at a safe location</p>
-                                    <p>Do not make an abrupt decision</p>
-                                    <p>Be honest with the ad you post</p>
-                                </div>
-                            </div> --}}
-
                         <!-- FEATURE CARD -->
                         <div class="common-card">
                             <div class="card-header">
@@ -328,9 +272,100 @@
                         </div>
                     </div>
                     <div class="col-lg-8">
-
-                        <!-- AD DETAILS CARD -->
                         <div class="common-card">
+                            <ol class="breadcrumb ad-details-breadcrumb">
+                                <li>
+                                    <span class="flat-badge sale">
+                                        @if (App::getLocale() == 'ar')
+                                            {{ $ads->type->name_ar }}
+                                        @else
+                                            {{ $ads->type->name_en }}
+                                        @endif
+                                    </span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-tags"></i></li>
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('ads.details', $ads->id) }}">
+                                            @if (App::getLocale() == 'ar')
+                                                {{ $ads->category->name_ar }}
+                                            @else
+                                                {{ $ads->category->name_en }}
+                                            @endif
+                                        </a>
+                                    </li>
+                            </ol>
+                            <h5 class="ad-details-address">
+
+                            </h5>
+                            <h3 class="ad-details-title">
+                                @if (App::getLocale() == 'ar')
+                                    {{ $ads->adsDetails->name_ar }}
+                                @else
+                                    {{ $ads->adsDetails->name_en }}
+                                @endif
+                            </h3>
+                            <div class="ad-details-meta">
+                                <a class="view">
+                                    <i class="fas fa-eye"></i>
+                                    <span><strong>(134)</strong>preview</span>
+                                </a>
+                                <a class="click">
+                                    <i class="fas fa-mouse"></i>
+                                    <span><strong>(76)</strong>click</span>
+                                </a>
+                                <a href="#review" class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <span><strong>(29)</strong>review</span>
+                                </a>
+                            </div>
+                            <div class="ad-details-slider-group">
+                                <div class="ad-details-slider slider-arrow">
+                                    @foreach ($ads->adsDetails->adsFiles as $file)
+                                        <div>
+                                            <img src="{{ asset('storage/ads/' . $ads->folder_name . '/' . $file->name) }}"
+                                            alt="details">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="cross-vertical-badge ad-details-badge">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    <span>recommend</span>
+                                </div>
+                            </div>
+                            <div class="ad-thumb-slider">
+                                @foreach ($ads->adsDetails->adsFiles as $file)
+                                    <div>
+                                        <img src="{{ asset('storage/ads/' . $ads->folder_name . '/' . $file->name) }}"
+                                        alt="details">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="ad-details-action">
+                                <button type="button" class="wish"><i class="fas fa-heart"></i>bookmark</button>
+                                <button type="button"><i class="fas fa-exclamation-triangle"></i>report</button>
+                                <button type="button" data-toggle="modal" data-target="#ad-share">
+                                    <i class="fas fa-share-alt"></i>
+                                    share
+                                </button>
+                            </div>
+                        </div>
+                        <!-- DESCRIPTION CARD -->
+                        <div class="common-card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ __('lang.ad details') }}</h5>
+                            </div>
+                            <p class="ad-details-desc">
+                                <br>
+                                @if (App::getLocale() == 'ar')
+                                    {{ $ads->adsDetails->description_ar }}
+                                @else
+                                    {{ $ads->adsDetails->description_en }}
+                                @endif
+                            </p>
+                        </div>
+                        <!-- AD DETAILS CARD -->
+                        {{-- <div class="common-card">
                             <ol class="breadcrumb ad-details-breadcrumb">
                                 <li><span class="flat-badge @if ($ads->type->id = 1) sale @else rent @endif">
                                         @if (App::getLocale() == 'ar')
@@ -347,21 +382,6 @@
                                     {{ $ads->adsDetails->name_en }}
                                 @endif
                             </h5>
-
-                            {{-- <div class="ad-details-meta">
-                                <a class="view">
-                                    <i class="fas fa-eye"></i>
-                                    <span><strong>(134)</strong>preview</span>
-                                </a>
-                                <a class="click">
-                                    <i class="fas fa-mouse"></i>
-                                    <span><strong>(76)</strong>click</span>
-                                </a>
-                                <a href="#review" class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <span><strong>(29)</strong>review</span>
-                                </a>
-                            </div> --}}
                             <div class="ad-details-slider-group">
                                 <div class="ad-details-slider slider-arrow">
                                     @foreach ($ads->adsDetails->adsFiles as $file)
@@ -381,180 +401,9 @@
                                             alt="details"></div>
                                 @endforeach
                             </div>
-                            {{-- <div class="ad-details-action">
-                                <button type="button" class="wish"><i class="fas fa-heart"></i>bookmark</button>
-                                <button type="button"><i class="fas fa-exclamation-triangle"></i>report</button>
-                                <button type="button" data-toggle="modal" data-target="#ad-share">
-                                    <i class="fas fa-share-alt"></i>
-                                    share
-                                </button>
-                            </div> --}}
-                        </div>
 
-                        <!-- SPECIFICATION CARD -->
-                        {{-- <div class="common-card">
-                                <div class="card-header">
-                                    <h5 class="card-title">Specification</h5>
-                                </div>
-                                <ul class="ad-details-specific">
-                                    <li>
-                                        <h6>price:</h6>
-                                        <p>$2,347</p>
-                                    </li>
-                                    <li>
-                                        <h6>seller type:</h6>
-                                        <p>personal</p>
-                                    </li>
-                                    <li>
-                                        <h6>published:</h6>
-                                        <p>february 02, 2021</p>
-                                    </li>
-                                    <li>
-                                        <h6>location:</h6>
-                                        <p>jalkuri, narayanganj</p>
-                                    </li>
-                                    <li>
-                                        <h6>category:</h6>
-                                        <p>property</p>
-                                    </li>
-                                    <li>
-                                        <h6>condition:</h6>
-                                        <p>used</p>
-                                    </li>
-                                    <li>
-                                        <h6>price type:</h6>
-                                        <p>negotiable</p>
-                                    </li>
-                                    <li>
-                                        <h6>ad type:</h6>
-                                        <p>sales</p>
-                                    </li>
-                                </ul>
-                            </div> --}}
+                        </div> --}}
 
-                        <!-- DESCRIPTION CARD -->
-                        <div class="common-card">
-                            <div class="card-header">
-                                <h5 class="card-title">{{ __('lang.ad details') }}</h5>
-                            </div>
-                            <p class="ad-details-desc">
-                                <br>
-                                @if (App::getLocale() == 'ar')
-                                    {{ $ads->adsDetails->description_ar }}
-                                @else
-                                    {{ $ads->adsDetails->description_en }}
-                                @endif
-                            </p>
-                        </div>
-
-                        <!-- REVIEWS CARD -->
-                        {{-- <div class="common-card" id="review">
-                                <div class="card-header">
-                                    <h5 class="card-title">المشهدات (2)</h5>
-                                </div>
-                                <div class="ad-details-review">
-                                    <ul class="review-list">
-                                        <li class="review-item">
-                                            <div class="review-user">
-                                                <div class="review-head">
-                                                    <div class="review-profile">
-                                                        <a href="#" class="review-avatar">
-                                                            <img src="images/avatar/03.jpg" alt="review">
-                                                        </a>
-                                                        <div class="review-meta">
-                                                            <h6>
-                                                                <a href="#">miron mahmud -</a>
-                                                                <span>June 02, 2020</span>
-                                                            </h6>
-                                                            <ul>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><h5>- for delivery system</h5></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="review-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit Non quibusdam harum ipsum dolor cumque quas magni voluptatibus cupiditate minima quis.</p>
-                                            </div>
-                                        </li>
-                                        <li class="review-item">
-                                            <div class="review-user">
-                                                <div class="review-head">
-                                                    <div class="review-profile">
-                                                        <a href="#" class="review-avatar">
-                                                            <img src="images/avatar/02.jpg" alt="review">
-                                                        </a>
-                                                        <div class="review-meta">
-                                                            <h6>
-                                                                <a href="#">labonno khan -</a>
-                                                                <span>June 02, 2020</span>
-                                                            </h6>
-                                                            <ul>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star active"></i></li>
-                                                                <li><i class="fas fa-star"></i></li>
-                                                                <li><h5>- for product quality</h5></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="review-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit Non quibusdam harum ipsum dolor cumque quas magni voluptatibus cupiditate minima quis.</p>
-                                            </div>
-                                            <div class="review-author">
-                                                <div class="review-head">
-                                                    <div class="review-profile">
-                                                        <a href="#" class="review-avatar">
-                                                            <img src="images/avatar/04.jpg" alt="review">
-                                                        </a>
-                                                        <div class="review-meta">
-                                                            <h6><a href="#">Miron Mahmud</a></h6>
-                                                            <h6>Author - <span>June 02, 2020</span></h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p class="review-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit Non quibusdam harum ipsum dolor cumque quas magni voluptatibus cupiditate minima.</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <form class="review-form">
-                                        <div class="star-rating">
-                                            <input type="radio" name="rating" id="star-1"><label for="star-1"></label>
-                                            <input type="radio" name="rating" id="star-2"><label for="star-2"></label>
-                                            <input type="radio" name="rating" id="star-3"><label for="star-3"></label>
-                                            <input type="radio" name="rating" id="star-4"><label for="star-4"></label>
-                                            <input type="radio" name="rating" id="star-5"><label for="star-5"></label>
-                                        </div>
-                                        <div class="review-form-grid">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Name">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" placeholder="Email">
-                                            </div>
-                                            <div class="form-group">
-                                                <select class="form-control custom-select">
-                                                    <option selected>Qoute</option>
-                                                    <option value="1">delivery system</option>
-                                                    <option value="2">product quality</option>
-                                                    <option value="3">payment issue</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea class="form-control" placeholder="Describe"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-inline review-submit">
-                                            <i class="fas fa-tint"></i>
-                                            <span>drop your review</span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div> --}}
 
                     </div>
                 </div>
@@ -589,8 +438,7 @@
                                                 alt="product">
                                         </div>
                                         <div class="product-type">
-                                            <span
-                                                class="flat-badge  @if ($similarAd->type->id = 1) sale @else rent @endif">
+                                            <span class="flat-badge  @if ($similarAd->type->id = 1) sale @else rent @endif">
                                                 @if (App::getLocale() == 'ar')
                                                     {{ $similarAd->type->name_ar }}
                                                 @else
@@ -623,7 +471,7 @@
                                             </li>
                                         </ol>
                                         <h5 class="product-title">
-                                            <a href="#">
+                                            <a href="{{ route('ads.details', $similarAd->id) }}">
                                                 @if (App::getLocale() == 'ar')
                                                     {{ $similarAd->adsDetails->name_ar }}
                                                 @else
@@ -667,7 +515,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="center-50">
-                            <a href="{{ route('ads.list') }}" class="btn btn-inline">
+                            <a href="{{ route('home.filter') }}" class="btn btn-inline">
                                 <i class="fas fa-eye"></i>
                                 <span>{{ __('button.all') }}</span>
                             </a>

@@ -1,92 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="rtl">
+@extends('layouts.app-master')
 
-<head>
-    <!--=====================================
-                    META-TAG PART START
-        =======================================-->
-    <!-- REQUIRE META -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- AUTHOR META -->
-    <meta name="author" content="Mironcoder">
-    <meta name="email" content="mironcoder@gmail.com">
-    <meta name="profile" content="https://themeforest.net/user/mironcoder">
-
-    <!-- TEMPLATE META -->
-    <meta name="name" content="Classicads">
-    <meta name="type" content="Classified Advertising">
-    <meta name="title" content="Classicads - Classified Ads HTML Template">
-    <meta name="keywords"
-        content="classicads, classified, ads, classified ads, listing, business, directory, jobs, marketing, portal, advertising, local, posting, ad listing, ad posting,">
-    <!--=====================================
-                    META-TAG PART END
-        =======================================-->
-
-    <!-- FOR WEBPAGE TITLE -->
-    <title>wejhatena</title>
-
-    <!--=====================================
-                    CSS LINK PART START
-        =======================================-->
-    <!-- FAVICON -->
-    <link rel="icon" href="images/favicon.png">
-
-    <!-- FONTS -->
-    <link rel="stylesheet" href="fonts/flaticon/flaticon.css">
-    <link rel="stylesheet" href="fonts/font-awesome/fontawesome.css">
-
-    <!-- VENDOR -->
-    <link rel="stylesheet" href="css/vendor/slick.min.css">
-    <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
-
-    <!-- CUSTOM -->
-    <link rel="stylesheet" href="css/custom/main.css">
-    <link rel="stylesheet" href="css/custom/index.css">
-    <!--=====================================
-                    CSS LINK PART END
-        =======================================-->
-    <style>
-        .marquee {
-            width: 100%;
-            line-height: 50px;
-            background-color: rgb(42, 23, 187);
-            color: white;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
-
-        .marquee p {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 30s linear infinite;
-        }
-
-        @keyframes marquee {
-            100% {
-                transform: translate(0, 100);
-            }
-
-            0% {
-                transform: translate(-100%, 0);
-            }
-        }
-
-        /* @keyframes marquee {
-    100%   { transform: translate(-100%, 0); }
-    0% { transform: translate(0, 0); }
-} */
-    </style>
-</head>
-
-<body>
-    <!--=====================================
-                    HEADER PART START
-        =======================================-->
-    @include('layout.header', ['setting' => $setting->color ?? '#04b']);
+@section('content')
     <!--=====================================
                     HEADER PART END
         =======================================-->
@@ -286,7 +201,7 @@
             <div class="banner-content">
                 <h1>{{ __('lang.home1') }}</h1>
                 <p>{{ __('lang.home2') }}</p>
-                <a href="{{ route('ads.list') }}" class="btn btn-outline">
+                <a href="{{ route('home.filter') }}" class="btn btn-outline">
                     <i class="fas fa-eye"></i>
                     <span>{{ __('button.all') }}</span>
                 </a>
@@ -314,7 +229,7 @@
                                 {{ $category->name_en }}
                             @endif
                         </h6>
-                        <p>({{ $category->count() }}) {{ __('ads.ads') }}</p>
+                        <p>({{ $category->ads_count }}) {{ __('ads.ads') }}</p>
                     </a>
                 @endforeach
             </div>
@@ -324,7 +239,7 @@
                     SUGGEST PART END
         =======================================-->
     <br>
-    <div class="marquee">
+    {{-- <div class="marquee">
         <p>
             @foreach ($news_externals as $news_external)
                 @if (App::getLocale() == 'ar')
@@ -334,7 +249,7 @@
                 @endif
             @endforeach
         </p>
-    </div>
+    </div> --}}
 
     <!--=====================================
                     FEATURE PART START
@@ -478,11 +393,10 @@
                                     <h5 class="product-title">
                                         <a href="{{ route('ads.details', $lastad->id) }}">
                                             @if (App::getLocale() == 'ar')
-                                                {{ $lastad->adsDetails->description_ar }}
+                                                {{ Str::limit($lastad->adsDetails->description_ar, 20, '...') }}
                                             @else
-                                                {{ $lastad->adsDetails->description_en }}
+                                                {{ Str::limit($lastad->adsDetails->description_en, 20, '...') }}
                                             @endif
-
                                         </a>
                                     </h5>
                                     <div class="product-meta">
@@ -516,7 +430,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="center-50">
-                        <a href="ad-list-column3.html" class="btn btn-inline">
+                        <a href="{{ route('home.filter') }}" class="btn btn-inline">
                             <i class="fas fa-eye"></i>
                             <span>{{ __('button.all') }}</span>
                         </a>
@@ -588,9 +502,9 @@
                                 <h5 class="product-title">
                                     <a href="{{ route('ads.details', $viewAds->id) }}">
                                         @if (App::getLocale() == 'ar')
-                                            {{ $viewAds->adsDetails->description_ar }}
+                                            {{ Str::limit($viewAds->adsDetails->description_ar, 20, '...') }}
                                         @else
-                                            {{ $viewAds->adsDetails->description_en }}
+                                            {{ Str::limit($viewAds->adsDetails->description_en, 20, '...') }}
                                         @endif
                                     </a>
                                 </h5>
@@ -618,7 +532,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="center-20">
-                        <a href="ad-list-column3.html" class="btn btn-inline">
+                        <a href="{{ route('home.filter') }}" class="btn btn-inline">
                             <i class="fas fa-eye"></i>
                             <span>{{ __('button.all') }}</span>
                         </a>
@@ -1717,7 +1631,7 @@
                             style="background: url(images/cities/01.jpg) no-repeat center; background-size: cover">
                             <div class="city-content">
                                 <h4>{{ $countrie->name_en }}</h4>
-                                <p>({{ $category->ads_count }}) {{ __('ads.ads') }}</p>
+                                <p>({{ $countrie->ads_count }}) {{ __('ads.ads') }}</p>
                             </div>
                         </a>
                     </div>
@@ -1726,7 +1640,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="center-20">
-                        <a href="cities.html" class="btn btn-inline">
+                        <a href="{{ route('home.filter') }}" class="btn btn-inline">
                             <i class="fas fa-eye"></i>
                             <span>{{ __('button.all_cities') }}</span>
                         </a>
@@ -1778,7 +1692,7 @@
                 <div class="col-md-12">
                     <div class="col-lg-12">
                         <div class="center-20">
-                            <a href="category-list.html" class="btn btn-inline">
+                            <a href="{{ route('home.filter') }}" class="btn btn-inline">
                                 <i class="fas fa-eye"></i>
                                 <span>{{ __('button.all_categories') }}</span>
                             </a>
@@ -2099,12 +2013,4 @@
     </section>
     <!--=====================================
         =======================================-->
-
-
-    @include('layout.footer')
-    <!--=====================================
-                    JS LINK PART END
-        =======================================-->
-</body>
-
-</html>
+@endsection

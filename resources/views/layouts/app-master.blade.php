@@ -77,7 +77,7 @@
         @stack('styles')
     </head>
     <body>
-        @include('layout.header', ['setting' => $setting->color ?? '#04b']);
+        @include('layout.header', ['setting' => $setting->color ?? '#04b'])
         <div>
             @yield('content')
         </div>

@@ -632,7 +632,7 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-xl-9">
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-lg-12">
                                 <div class="header-filter">
                                     <div class="filter-show">
@@ -659,7 +659,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="ad-feature-slider slider-arrow">
@@ -764,108 +764,92 @@
                         </div>
                         <div class="row">
                             @foreach ($ads as $ad)
-                            <div class="product-card">
-                                <div class="product-media">
-                                    <div class="product-img">
-                                        <img src="{{ asset('storage/ads/' . $ad->folder_name . '/' . $ad->adsDetails->cover_image->name) }}"
-                                            alt="product">
-                                    </div>
-                                    {{-- <div class="cross-vertical-badge product-badge">
-                                        <i class="fas fa-clipboard-check"></i>
-                                        <span>recommend</span>
-                                    </div> --}}
-                                    <div class="product-type">
-                                        <span
-                                            class="flat-badge @if ($ad->type->id = 1) sale @else rent @endif">
-                                            @if (App::getLocale() == 'ar')
-                                                {{ $ad->type->name_ar }}
-                                            @else
-                                                {{ $ad->type->name_en }}
-                                            @endif
-                                        </span>
-                                    </div>
-                                    <ul class="product-action">
-                                        <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
-                                        {{-- <li class="click"><i class="fas fa-mouse"></i><span>134</span></li> --}}
-                                        {{-- <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li> --}}
-                                    </ul>
-                                </div>
-                                <div class="product-content">
-                                    <ol class="breadcrumb product-category">
-                                        <li><i class="fas fa-tags"></i></li>
-                                        <li class="breadcrumb-item"><a href="{{ route('ads.details', $ad->id) }}">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                                <div class="product-card">
+                                    <div class="product-media">
+                                        <div class="product-img">
+                                            <img src="{{ asset('storage/ads/' . $ad->folder_name . '/' . $ad->adsDetails->cover_image->name) }}"
+                                                alt="product">
+                                        </div>
+                                        {{-- <div class="cross-vertical-badge product-badge">
+                                            <i class="fas fa-clipboard-check"></i>
+                                            <span>recommend</span>
+                                        </div> --}}
+                                        <div class="product-type">
+                                            <span
+                                                class="flat-badge @if ($ad->type->id = 1) sale @else rent @endif">
                                                 @if (App::getLocale() == 'ar')
-                                                    {{ $ad->category->name_ar }}
+                                                    {{ $ad->type->name_ar }}
                                                 @else
-                                                    {{ $ad->category->name_en }}
+                                                    {{ $ad->type->name_en }}
                                                 @endif
-                                            </a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">
-                                            @if (App::getLocale() == 'ar')
-                                                {{ $ad->adsDetails->name_ar }}
-                                            @else
-                                                {{ $ad->adsDetails->name_en }}
-                                            @endif
-                                        </li>
-                                    </ol>
-                                    <h5 class="product-title">
-                                        <a href="{{ route('ads.details', $ad->id) }}">
-                                            @if (App::getLocale() == 'ar')
-                                                {{ $ad->adsDetails->description_ar }}
-                                            @else
-                                                {{ $ad->adsDetails->description_en }}
-                                            @endif
-
-                                        </a>
-                                    </h5>
-                                    <div class="product-meta">
-                                        <span><i class="fas fa-map-marker-alt"></i>
-                                            @if (App::getLocale() == 'ar')
-                                                {{ $ad->city->name_ar }}
-                                            @else
-                                                {{ $ad->city->name_en }}
-                                            @endif ,
-                                            @if (App::getLocale() == 'ar')
-                                                {{ $ad->country->name_ar }}
-                                            @else
-                                                {{ $ad->country->name_en }}
-                                            @endif
-                                        </span>
-
+                                            </span>
+                                        </div>
+                                        <ul class="product-action">
+                                            <li class="view"><i class="fas fa-eye"></i><span>264</span></li>
+                                            {{-- <li class="click"><i class="fas fa-mouse"></i><span>134</span></li> --}}
+                                            {{-- <li class="rating"><i class="fas fa-star"></i><span>4.5/7</span></li> --}}
+                                        </ul>
                                     </div>
-                                    {{-- <div class="product-info">
-                                        <h5 class="product-price">$150000<span>/السعر</span></h5>
-                                        <div class="product-btn">
-                                            {{-- <a href="compare.html" title="Compare" class="fas fa-compress"></a>
-                                            <button type="button" title="Wishlist" class="far fa-heart"></button> --}}
-                                    {{-- </div> --}}
-                                    {{-- </div> --}}
+                                    <div class="product-content">
+                                        <ol class="breadcrumb product-category">
+                                            <li><i class="fas fa-tags"></i></li>
+                                            <li class="breadcrumb-item"><a href="{{ route('ads.details', $ad->id) }}">
+                                                    @if (App::getLocale() == 'ar')
+                                                        {{ $ad->category->name_ar }}
+                                                    @else
+                                                        {{ $ad->category->name_en }}
+                                                    @endif
+                                                </a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">
+                                                @if (App::getLocale() == 'ar')
+                                                    {{ $ad->adsDetails->name_ar }}
+                                                @else
+                                                    {{ $ad->adsDetails->name_en }}
+                                                @endif
+                                            </li>
+                                        </ol>
+                                        <h5 class="product-title">
+                                            <a href="{{ route('ads.details', $ad->id) }}">
+                                                @if (App::getLocale() == 'ar')
+                                                    {{ Str::limit($ad->adsDetails->description_ar, 20, '...') }}
+                                                @else
+                                                    {{ Str::limit($ad->adsDetails->description_en, 20, '...') }}
+                                                @endif
+
+                                            </a>
+                                        </h5>
+                                        <div class="product-meta">
+                                            <span><i class="fas fa-map-marker-alt"></i>
+                                                @if (App::getLocale() == 'ar')
+                                                    {{ $ad->city->name_ar }}
+                                                @else
+                                                    {{ $ad->city->name_en }}
+                                                @endif ,
+                                                @if (App::getLocale() == 'ar')
+                                                    {{ $ad->country->name_ar }}
+                                                @else
+                                                    {{ $ad->country->name_en }}
+                                                @endif
+                                            </span>
+
+                                        </div>
+                                        {{-- <div class="product-info">
+                                            <h5 class="product-price">$150000<span>/السعر</span></h5>
+                                            <div class="product-btn">
+                                                {{-- <a href="compare.html" title="Compare" class="fas fa-compress"></a>
+                                                <button type="button" title="Wishlist" class="far fa-heart"></button> --}}
+                                        {{-- </div> --}}
+                                        {{-- </div> --}}
+                                    </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
+
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="footer-pagection">
-                                    <p class="page-info">Showing 12 of 60 Results</p>
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                <i class="fas fa-long-arrow-alt-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">...</li>
-                                        <li class="page-item"><a class="page-link" href="#">67</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                <i class="fas fa-long-arrow-alt-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                {{ $ads->links() }}
                             </div>
                         </div>
                     </div>
