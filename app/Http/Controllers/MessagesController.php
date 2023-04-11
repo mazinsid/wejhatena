@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ads;
 use App\Models\Message;
 use App\Models\Room;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,8 @@ class MessagesController extends Controller
 {
     public function adsMessage($id)
     {
+
+        $setting = Setting::first();
         $ads = Ads::where('id', $id)->get();
         foreach ($ads as $ad) {
             $advertiser_id = $ad->user_id;
@@ -31,7 +34,7 @@ class MessagesController extends Controller
         $ads = Ads::where('id', $id)->get();
         $messages =  Message::where('room_id', $room->id)->get();
         // dd($messages);
-        return view('ads.ads_message', compact('ads', 'room', 'messages'));
+        return view('ads.ads_message', compact('ads', 'room', 'messages', 'setting'));
     }
 
     public function messageRoom($id)

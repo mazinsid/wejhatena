@@ -76,9 +76,11 @@ class adsController extends Controller
 
             $ads->city_id = $request->cities;
             $ads->country_id = $request->countries;
+            $ads->subcategory_id = $request->category;
             // $adsDetails->district_id = $request->district ? $request->district : null;
             $adsDetails->name_en = $request->name_en;
             $adsDetails->name_ar = $request->name_ar;
+            $adsDetails->phone_no = $request->phone_no;
             $adsDetails->description_en = $request->description_en;
             $adsDetails->description_ar = $request->description_ar;
             $category = $request->category;

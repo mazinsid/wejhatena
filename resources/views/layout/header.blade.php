@@ -60,32 +60,14 @@
                     </li>
                     @if (Auth::user())
                         <li class="header-item">
-                            <button type="button" class="header-widget">
-                                <i class="fas fa-envelope"></i>
-                                <sup>0</sup>
-                            </button>
-                            <div class="dropdown-card">
-                                <div class="dropdown-header">
-                                    <h5>{{ __('lang.message') }} (2)</h5>
-                                    <a
-                                        href="{{ route('getUserRooms', Auth::user()->id) }}">{{ __('lang.view all') }}</a>
-                                </div>
-                                <ul class="message-list">
-                                    {{-- <li class="message-item unread">
-                                        <a href="message.html" class="message-link">
-                                            <div class="message-img active">
-                                                <img src="images/avatar/01.jpg" alt="avatar">
-                                            </div>
-                                            <div class="message-text">
-                                                <h6>miron mahmud <span>now</span></h6>
-                                                <p>How are you my best frien...</p>
-                                            </div>
-                                            <span class="message-count">4</span>
-                                        </a>
-                                    </li> --}}
 
-                                </ul>
-                            </div>
+                            <a href="{{ route('getUserRooms', Auth::user()->id) }}" type="button"
+                                class="header-widget">
+                                <i class="fas fa-envelope">
+                                </i>
+                                <sup>0</sup>
+                            </a>
+
                         </li>
                     @endif
                     {{-- <li class="header-item">

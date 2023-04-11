@@ -3,13 +3,13 @@
 
 @section('content')
     <!--=====================================
-                    HEADER PART END
-        =======================================-->
+                        HEADER PART END
+            =======================================-->
 
 
     <!--=====================================
-                    SIDEBAR PART START
-        =======================================-->
+                        SIDEBAR PART START
+            =======================================-->
     {{-- <aside class="sidebar-part">
         <div class="sidebar-body">
             <div class="sidebar-header">
@@ -133,14 +133,14 @@
         </div>
     </aside> --}}
     <!--=====================================
-                    SIDEBAR PART END
-        =======================================-->
+                        SIDEBAR PART END
+            =======================================-->
 
 
     <!--=====================================
-                    MOBILE-NAV PART START
-        =======================================-->
-    {{-- <nav class="mobile-nav">
+                        MOBILE-NAV PART START
+            =======================================-->
+    <nav class="mobile-nav">
         <div class="container">
             <div class="mobile-group">
                 <a href="index.html" class="mobile-widget">
@@ -187,15 +187,15 @@
                 </a>
             </div>
         </div>
-    </nav> --}}
+    </nav>
     <!--=====================================
-                    MOBILE-NAV PART END
-        =======================================-->
+                        MOBILE-NAV PART END
+            =======================================-->
 
 
     <!--=====================================
-                    BANNER PART START
-        =======================================-->
+                        BANNER PART START
+            =======================================-->
     <section class="banner-part">
         <div class="container">
             <div class="banner-content">
@@ -209,13 +209,13 @@
         </div>
     </section>
     <!--=====================================
-                    BANNER PART END
-        =======================================-->
+                        BANNER PART END
+            =======================================-->
 
 
     <!--=====================================
-                    SUGGEST PART START
-        =======================================-->
+                        SUGGEST PART START
+            =======================================-->
     <section class="suggest-part">
         <div class="container">
             <div class="suggest-slider slider-arrow">
@@ -236,8 +236,8 @@
         </div>
     </section>
     <!--=====================================
-                    SUGGEST PART END
-        =======================================-->
+                        SUGGEST PART END
+            =======================================-->
     <br>
     {{-- <div class="marquee">
         <p>
@@ -252,8 +252,8 @@
     </div> --}}
 
     <!--=====================================
-                    FEATURE PART START
-        =======================================-->
+                        FEATURE PART START
+            =======================================-->
     <section class="section feature-part">
         <div class="container">
             <div class="row">
@@ -325,13 +325,13 @@
         </div>
     </section>
     <!--=====================================
-                    FEATURE PART END
-        =======================================-->
+                        FEATURE PART END
+            =======================================-->
 
 
     <!--=====================================
-                    RECOMEND PART START
-        =======================================-->
+                        RECOMEND PART START
+            =======================================-->
     <section class="section recomend-part">
         <div class="container">
             <div class="row">
@@ -357,8 +357,7 @@
                                         <span>recommend</span>
                                     </div> --}}
                                     <div class="product-type">
-                                        <span
-                                            class="flat-badge @if ($lastad->type->id = 1) sale @else rent @endif">
+                                        <span class="flat-badge @if ($lastad->type->id = 1) sale @else rent @endif">
                                             @if (App::getLocale() == 'ar')
                                                 {{ $lastad->type->name_ar }}
                                             @else
@@ -440,13 +439,13 @@
         </div>
     </section>
     <!--=====================================
-                    RECOMEND PART START
-        =======================================-->
+                        RECOMEND PART START
+            =======================================-->
 
 
     <!--=====================================
-                    TREND PART START
-        =======================================-->
+                        TREND PART START
+            =======================================-->
     <section class="section trend-part">
         <div class="container">
             <div class="row">
@@ -542,13 +541,13 @@
         </div>
     </section>
     <!--=====================================
-                    TREND PART END
-        =======================================-->
+                        TREND PART END
+            =======================================-->
 
 
     <!--=====================================
-                    NICHE PART START
-        =======================================-->
+                        NICHE PART START
+            =======================================-->
     {{-- <section class="section niche-part">
             <div class="container">
                 <div class="row">
@@ -1607,13 +1606,13 @@
             </div>
         </section> --}}
     <!--=====================================
-                    NICHE PART END
-        =======================================-->
+                        NICHE PART END
+            =======================================-->
 
 
     <!--=====================================
-                    CITY PART START
-        =======================================-->
+                        CITY PART START
+            =======================================-->
     <section class="section city-part">
         <div class="container">
             <div class="row">
@@ -1650,13 +1649,13 @@
         </div>
     </section>
     <!--=====================================
-                    CITY PART END
-        =======================================-->
+                        CITY PART END
+            =======================================-->
 
 
     <!--=====================================
-                    CATEGORY PART START
-        =======================================-->
+                        CATEGORY PART START
+            =======================================-->
     <section class="section category-part">
         <div class="container">
             <div class="row">
@@ -1673,14 +1672,16 @@
                         <div class="category-card">
                             <div class="category-head">
                                 <img src="{{ asset('/storage/category/' . $category->icon) }}" alt="category">
-                                <a href="{{ route('home.filter', $category) }}?type=category&category={{ $category->id }}" class="category-content">
+                                <a href="{{ route('home.filter', $category) }}?type=category&category={{ $category->id }}"
+                                    class="category-content">
                                     <h4>{{ $categorie->name_en }}</h4>
                                     <p>(3678)</p>
                                 </a>
                             </div>
                             <ul class="category-list">
                                 @foreach ($categorie->subcategories as $catsub)
-                                    <li><a href="{{ route('home.filter') }}?type=sub_category&category={{ $catsub->id }}">
+                                    <li><a
+                                            href="{{ route('home.filter') }}?type=sub_category&category={{ $catsub->id }}">
                                             <h6>{{ $catsub->name_en }}</h6>
                                             <p>({{ $catsub->ads_count }})</p>
                                         </a></li>
@@ -1702,13 +1703,13 @@
             </div>
     </section>
     <!--=====================================
-                    CATEGORY PART END
-        =======================================-->
+                        CATEGORY PART END
+            =======================================-->
 
 
     <!--=====================================
-                    INTRO PART START
-        =======================================-->
+                        INTRO PART START
+            =======================================-->
     <section class="intro-part">
         <div class="container">
             <div class="row">
@@ -1726,13 +1727,13 @@
         </div>
     </section>
     <!--=====================================
-                    INTRO PART END
-        =======================================-->
+                        INTRO PART END
+            =======================================-->
 
 
     <!--=====================================
-                     PRICE PART START
-        =======================================-->
+                         PRICE PART START
+            =======================================-->
     <section class="price-part">
         <div class="container">
             <div class="row">
@@ -1852,13 +1853,13 @@
         </div>
     </section>
     <!--=====================================
-                     PRICE PART END
-        =======================================-->
+                         PRICE PART END
+            =======================================-->
 
 
     <!--=====================================
-                     BLOG PART START
-        =======================================-->
+                         BLOG PART START
+            =======================================-->
     <section class="blog-part">
         <div class="container">
             {{-- <div class="row">
@@ -2012,5 +2013,5 @@
         </div>
     </section>
     <!--=====================================
-        =======================================-->
+            =======================================-->
 @endsection

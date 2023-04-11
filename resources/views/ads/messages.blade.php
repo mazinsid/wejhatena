@@ -130,7 +130,7 @@
                         <form action="{{ route('add.message') }}" method="POST">
                             @csrf
                             <input name="sender_id" value="{{ Auth::user()->id }}" hidden>
-                            <input name="room_id" value="{{ $room->id }}" hidden>
+                            {{-- <input name="room_id" value="{{ $room->id }}" hidden> --}}
                             <textarea placeholder="Type a Message" name="message" id="chat-emoji"></textarea>
                             <button type="submit"><i class="fas fa-paper-plane"></i></button>
                         </form>
